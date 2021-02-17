@@ -10,11 +10,6 @@
       "StackName": "amplify-xira-dev-181217",
       "StackId": "arn:aws:cloudformation:us-east-1:736335554218:stack/amplify-xira-dev-181217/925e3d90-70c5-11eb-8cd7-0a9bf4500c63",
       "AmplifyAppId": "d2cyqt56kqpawm"
-    },
-    "categories": {
-      "auth": {
-        "xirae3116d03": {}
-      }
     }
   }
 }

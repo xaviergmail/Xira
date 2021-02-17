@@ -16,10 +16,45 @@
 #   content: String!
 # }
 
+type User
+  @model
+  @auth(rules: [{ allow: owner, operations: [create, update] }]) {
+  id: ID!
+  email: AWSEmail!
+  registeredAt: AWSDateTime!
+}
+
+type Label @model {
+  id: ID!
+  name: String
+  color: Int
+  issues: [LabelIssues] @connection(keyName: "byLabel", fields: ["id"])
+}
+
+type LabelIssues
+  @model(queries: null)
+  @key(name: "byLabel", fields: ["labelID", "issueID"])
+  @key(name: "byIssue", fields: ["issueID", "labelID"]) {
+  id: ID!
+  labelID: ID!
+  issueID: ID!
+
+  label: Label! @connection(fields: ["labelID"])
+  issue: Issue! @connection(fields: ["issueID"])
+}
+
+type Comment @model {
+  id: ID!
+  issueID: ID!
+  creator: User! @connection
+  text: String!
+}
+
 type Issue @model {
   id: ID!
+  creator: User! @connection
   title: String!
-  description: String!
-  comments: [String]
-  labels: [String]
+  text: String!
+  comments: [Comment]
+  labels: [LabelIssues] @connection(keyName: "byIssue", fields: ["id"])
 }
