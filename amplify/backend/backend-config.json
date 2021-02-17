@@ -1,12 +1,5 @@
 {
-  "auth": {
-    "xirae3116d03": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
+  "auth": {},
   "api": {
     "xira": {
       "service": "AppSync",

@@ -2,20 +2,22 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTaskInput = {
+export type CreateIssueInput = {
   id?: string | null,
   title: string,
-  description?: string | null,
-  status?: string | null,
+  description: string,
+  comments?: Array< string | null > | null,
+  labels?: Array< string | null > | null,
 };
 
-export type ModelTaskConditionInput = {
+export type ModelIssueConditionInput = {
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  and?: Array< ModelTaskConditionInput | null > | null,
-  or?: Array< ModelTaskConditionInput | null > | null,
-  not?: ModelTaskConditionInput | null,
+  comments?: ModelStringInput | null,
+  labels?: ModelStringInput | null,
+  and?: Array< ModelIssueConditionInput | null > | null,
+  or?: Array< ModelIssueConditionInput | null > | null,
+  not?: ModelIssueConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -58,65 +60,38 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Task = {
-  __typename: "Task",
+export type Issue = {
+  __typename: "Issue",
   id?: string,
   title?: string,
-  description?: string | null,
-  status?: string | null,
+  description?: string,
+  comments?: Array< string | null > | null,
+  labels?: Array< string | null > | null,
   createdAt?: string,
   updatedAt?: string,
 };
 
-export type UpdateTaskInput = {
+export type UpdateIssueInput = {
   id: string,
   title?: string | null,
   description?: string | null,
-  status?: string | null,
+  comments?: Array< string | null > | null,
+  labels?: Array< string | null > | null,
 };
 
-export type DeleteTaskInput = {
+export type DeleteIssueInput = {
   id?: string | null,
 };
 
-export type CreatePrivateNoteInput = {
-  id?: string | null,
-  content: string,
-};
-
-export type ModelPrivateNoteConditionInput = {
-  content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteConditionInput | null > | null,
-  or?: Array< ModelPrivateNoteConditionInput | null > | null,
-  not?: ModelPrivateNoteConditionInput | null,
-};
-
-export type PrivateNote = {
-  __typename: "PrivateNote",
-  id?: string,
-  content?: string,
-  createdAt?: string,
-  updatedAt?: string,
-  owner?: string | null,
-};
-
-export type UpdatePrivateNoteInput = {
-  id: string,
-  content?: string | null,
-};
-
-export type DeletePrivateNoteInput = {
-  id?: string | null,
-};
-
-export type ModelTaskFilterInput = {
+export type ModelIssueFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  and?: Array< ModelTaskFilterInput | null > | null,
-  or?: Array< ModelTaskFilterInput | null > | null,
-  not?: ModelTaskFilterInput | null,
+  comments?: ModelStringInput | null,
+  labels?: ModelStringInput | null,
+  and?: Array< ModelIssueFilterInput | null > | null,
+  or?: Array< ModelIssueFilterInput | null > | null,
+  not?: ModelIssueFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -135,156 +110,99 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTaskConnection = {
-  __typename: "ModelTaskConnection",
-  items?:  Array<Task | null > | null,
+export type ModelIssueConnection = {
+  __typename: "ModelIssueConnection",
+  items?:  Array<Issue | null > | null,
   nextToken?: string | null,
 };
 
-export type ModelPrivateNoteFilterInput = {
-  id?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteFilterInput | null > | null,
-  or?: Array< ModelPrivateNoteFilterInput | null > | null,
-  not?: ModelPrivateNoteFilterInput | null,
+export type CreateIssueMutationVariables = {
+  input?: CreateIssueInput,
+  condition?: ModelIssueConditionInput | null,
 };
 
-export type ModelPrivateNoteConnection = {
-  __typename: "ModelPrivateNoteConnection",
-  items?:  Array<PrivateNote | null > | null,
-  nextToken?: string | null,
-};
-
-export type CreateTaskMutationVariables = {
-  input?: CreateTaskInput,
-  condition?: ModelTaskConditionInput | null,
-};
-
-export type CreateTaskMutation = {
-  createTask?:  {
-    __typename: "Task",
+export type CreateIssueMutation = {
+  createIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTaskMutationVariables = {
-  input?: UpdateTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type UpdateIssueMutationVariables = {
+  input?: UpdateIssueInput,
+  condition?: ModelIssueConditionInput | null,
 };
 
-export type UpdateTaskMutation = {
-  updateTask?:  {
-    __typename: "Task",
+export type UpdateIssueMutation = {
+  updateIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTaskMutationVariables = {
-  input?: DeleteTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type DeleteIssueMutationVariables = {
+  input?: DeleteIssueInput,
+  condition?: ModelIssueConditionInput | null,
 };
 
-export type DeleteTaskMutation = {
-  deleteTask?:  {
-    __typename: "Task",
+export type DeleteIssueMutation = {
+  deleteIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type CreatePrivateNoteMutationVariables = {
-  input?: CreatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
-};
-
-export type CreatePrivateNoteMutation = {
-  createPrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type UpdatePrivateNoteMutationVariables = {
-  input?: UpdatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
-};
-
-export type UpdatePrivateNoteMutation = {
-  updatePrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeletePrivateNoteMutationVariables = {
-  input?: DeletePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
-};
-
-export type DeletePrivateNoteMutation = {
-  deletePrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type GetTaskQueryVariables = {
+export type GetIssueQueryVariables = {
   id?: string,
 };
 
-export type GetTaskQuery = {
-  getTask?:  {
-    __typename: "Task",
+export type GetIssueQuery = {
+  getIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTasksQueryVariables = {
-  filter?: ModelTaskFilterInput | null,
+export type ListIssuesQueryVariables = {
+  filter?: ModelIssueFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTasksQuery = {
-  listTasks?:  {
-    __typename: "ModelTaskConnection",
+export type ListIssuesQuery = {
+  listIssues?:  {
+    __typename: "ModelIssueConnection",
     items?:  Array< {
-      __typename: "Task",
+      __typename: "Issue",
       id: string,
       title: string,
-      description?: string | null,
-      status?: string | null,
+      description: string,
+      comments?: Array< string | null > | null,
+      labels?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -292,119 +210,41 @@ export type ListTasksQuery = {
   } | null,
 };
 
-export type GetPrivateNoteQueryVariables = {
-  id?: string,
-};
-
-export type GetPrivateNoteQuery = {
-  getPrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListPrivateNotesQueryVariables = {
-  filter?: ModelPrivateNoteFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPrivateNotesQuery = {
-  listPrivateNotes?:  {
-    __typename: "ModelPrivateNoteConnection",
-    items?:  Array< {
-      __typename: "PrivateNote",
-      id: string,
-      content: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type OnCreateTaskSubscription = {
-  onCreateTask?:  {
-    __typename: "Task",
+export type OnCreateIssueSubscription = {
+  onCreateIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTaskSubscription = {
-  onUpdateTask?:  {
-    __typename: "Task",
+export type OnUpdateIssueSubscription = {
+  onUpdateIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTaskSubscription = {
-  onDeleteTask?:  {
-    __typename: "Task",
+export type OnDeleteIssueSubscription = {
+  onDeleteIssue?:  {
+    __typename: "Issue",
     id: string,
     title: string,
-    description?: string | null,
-    status?: string | null,
+    description: string,
+    comments?: Array< string | null > | null,
+    labels?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type OnCreatePrivateNoteSubscriptionVariables = {
-  owner?: string,
-};
-
-export type OnCreatePrivateNoteSubscription = {
-  onCreatePrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdatePrivateNoteSubscriptionVariables = {
-  owner?: string,
-};
-
-export type OnUpdatePrivateNoteSubscription = {
-  onUpdatePrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeletePrivateNoteSubscriptionVariables = {
-  owner?: string,
-};
-
-export type OnDeletePrivateNoteSubscription = {
-  onDeletePrivateNote?:  {
-    __typename: "PrivateNote",
-    id: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
   } | null,
 };
