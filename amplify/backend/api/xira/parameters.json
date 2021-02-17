@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "xira",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authxirae3116d03",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

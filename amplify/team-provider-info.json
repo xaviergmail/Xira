@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-xira-dev-181217-authRole",
+      "UnauthRoleArn": "arn:aws:iam::736335554218:role/amplify-xira-dev-181217-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::736335554218:role/amplify-xira-dev-181217-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-xira-dev-181217-deployment",
+      "UnauthRoleName": "amplify-xira-dev-181217-unauthRole",
+      "StackName": "amplify-xira-dev-181217",
+      "StackId": "arn:aws:cloudformation:us-east-1:736335554218:stack/amplify-xira-dev-181217/925e3d90-70c5-11eb-8cd7-0a9bf4500c63",
+      "AmplifyAppId": "d2cyqt56kqpawm"
+    },
+    "categories": {
+      "auth": {
+        "xirae3116d03": {}
+      }
+    }
+  }
+}
