@@ -43,7 +43,7 @@ type LabelIssues
   issue: Issue! @connection(fields: ["issueID"])
 }
 
-type Comment @model {
+type Comment @model @key(name: "byIssue", fields: ["issueID", "text"]) {
   id: ID!
   issueID: ID!
   creator: User! @connection
@@ -55,6 +55,6 @@ type Issue @model {
   creator: User! @connection
   title: String!
   text: String!
-  comments: [Comment]
+  comments: [Comment] @connection(keyName: "byIssue", fields: ["id"])
   labels: [LabelIssues] @connection(keyName: "byIssue", fields: ["id"])
 }

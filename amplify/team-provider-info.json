@@ -10,6 +10,22 @@
       "StackName": "amplify-xira-dev-181217",
       "StackId": "arn:aws:cloudformation:us-east-1:736335554218:stack/amplify-xira-dev-181217/925e3d90-70c5-11eb-8cd7-0a9bf4500c63",
       "AmplifyAppId": "d2cyqt56kqpawm"
+    },
+    "categories": {
+      "function": {
+        "xiraAuthPostConfirmation": {
+          "GROUP": "Verified",
+          "deploymentBucketName": "amplify-xira-dev-181217-deployment",
+          "s3Key": "amplify-builds/xiraAuthPostConfirmation-41766d4c626b6930356e-build.zip"
+        },
+        "AdminQueriesa02ab228": {
+          "deploymentBucketName": "amplify-xira-dev-181217-deployment",
+          "s3Key": "amplify-builds/AdminQueriesa02ab228-72464f6136585961562b-build.zip"
+        }
+      },
+      "auth": {
+        "xiraAuth": {}
+      }
     }
   }
 }

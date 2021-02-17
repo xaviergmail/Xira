@@ -40,13 +40,6 @@ export const getLabel = /* GraphQL */ `
       name
       color
       issues {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -65,9 +58,6 @@ export const listLabels = /* GraphQL */ `
         id
         name
         color
-        issues {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -104,14 +94,6 @@ export const listComments = /* GraphQL */ `
       items {
         id
         issueID
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
         text
         createdAt
         updatedAt
@@ -135,28 +117,9 @@ export const getIssue = /* GraphQL */ `
       title
       text
       comments {
-        id
-        issueID
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
-        text
-        createdAt
-        updatedAt
+        nextToken
       }
       labels {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -173,26 +136,8 @@ export const listIssues = /* GraphQL */ `
     listIssues(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
         title
         text
-        comments {
-          id
-          issueID
-          text
-          createdAt
-          updatedAt
-        }
-        labels {
-          nextToken
-        }
         createdAt
         updatedAt
       }

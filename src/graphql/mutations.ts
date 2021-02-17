@@ -57,13 +57,6 @@ export const createLabel = /* GraphQL */ `
       name
       color
       issues {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -81,13 +74,6 @@ export const updateLabel = /* GraphQL */ `
       name
       color
       issues {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -105,13 +91,6 @@ export const deleteLabel = /* GraphQL */ `
       name
       color
       issues {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -132,34 +111,13 @@ export const createLabelIssues = /* GraphQL */ `
         id
         name
         color
-        issues {
-          nextToken
-        }
         createdAt
         updatedAt
       }
       issue {
         id
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
         title
         text
-        comments {
-          id
-          issueID
-          text
-          createdAt
-          updatedAt
-        }
-        labels {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -181,34 +139,13 @@ export const updateLabelIssues = /* GraphQL */ `
         id
         name
         color
-        issues {
-          nextToken
-        }
         createdAt
         updatedAt
       }
       issue {
         id
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
         title
         text
-        comments {
-          id
-          issueID
-          text
-          createdAt
-          updatedAt
-        }
-        labels {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -230,34 +167,13 @@ export const deleteLabelIssues = /* GraphQL */ `
         id
         name
         color
-        issues {
-          nextToken
-        }
         createdAt
         updatedAt
       }
       issue {
         id
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
         title
         text
-        comments {
-          id
-          issueID
-          text
-          createdAt
-          updatedAt
-        }
-        labels {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -350,28 +266,9 @@ export const createIssue = /* GraphQL */ `
       title
       text
       comments {
-        id
-        issueID
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
-        text
-        createdAt
-        updatedAt
+        nextToken
       }
       labels {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -397,28 +294,9 @@ export const updateIssue = /* GraphQL */ `
       title
       text
       comments {
-        id
-        issueID
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
-        text
-        createdAt
-        updatedAt
+        nextToken
       }
       labels {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
@@ -444,28 +322,9 @@ export const deleteIssue = /* GraphQL */ `
       title
       text
       comments {
-        id
-        issueID
-        creator {
-          id
-          email
-          registeredAt
-          createdAt
-          updatedAt
-          owner
-        }
-        text
-        createdAt
-        updatedAt
+        nextToken
       }
       labels {
-        items {
-          id
-          labelID
-          issueID
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       createdAt
