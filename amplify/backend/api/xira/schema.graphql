@@ -18,13 +18,26 @@
 
 type User
   @model
-  @auth(rules: [{ allow: owner, operations: [create, update] }]) {
+  @auth(
+    rules: [{ allow: owner, ownerField: "id", operations: [create, update] }]
+  ) {
   id: ID!
   email: AWSEmail!
-  registeredAt: AWSDateTime!
 }
 
-type Label @model {
+type Label
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        queries: null
+        mutations: [create, update, delete]
+      }
+      { allow: private, queries: [get, list], mutations: null }
+    ]
+  ) {
   id: ID!
   name: String
   color: Int
@@ -50,9 +63,10 @@ type Comment @model @key(name: "byIssue", fields: ["issueID", "text"]) {
   text: String!
 }
 
-type Issue @model {
+type Issue
+  @model
+  @auth(rules: [{ allow: owner, operations: [create, update] }]) {
   id: ID!
-  creator: User! @connection
   title: String!
   text: String!
   comments: [Comment] @connection(keyName: "byIssue", fields: ["id"])

@@ -5,12 +5,10 @@
 export type CreateUserInput = {
   id?: string | null,
   email: string,
-  registeredAt: string,
 };
 
 export type ModelUserConditionInput = {
   email?: ModelStringInput | null,
-  registeredAt?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -60,16 +58,13 @@ export type User = {
   __typename: "User",
   id?: string,
   email?: string,
-  registeredAt?: string,
   createdAt?: string,
   updatedAt?: string,
-  owner?: string | null,
 };
 
 export type UpdateUserInput = {
   id: string,
   email?: string | null,
-  registeredAt?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -132,13 +127,13 @@ export type LabelIssues = {
 export type Issue = {
   __typename: "Issue",
   id?: string,
-  creator?: User,
   title?: string,
   text?: string,
   comments?: ModelCommentConnection,
   labels?: ModelLabelIssuesConnection,
   createdAt?: string,
   updatedAt?: string,
+  owner?: string | null,
 };
 
 export type ModelCommentConnection = {
@@ -237,7 +232,6 @@ export type CreateIssueInput = {
   id?: string | null,
   title: string,
   text: string,
-  issueCreatorId: string,
 };
 
 export type ModelIssueConditionInput = {
@@ -252,7 +246,6 @@ export type UpdateIssueInput = {
   id: string,
   title?: string | null,
   text?: string | null,
-  issueCreatorId?: string | null,
 };
 
 export type DeleteIssueInput = {
@@ -262,7 +255,6 @@ export type DeleteIssueInput = {
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   email?: ModelStringInput | null,
-  registeredAt?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -323,10 +315,8 @@ export type CreateUserMutation = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -340,10 +330,8 @@ export type UpdateUserMutation = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -357,10 +345,8 @@ export type DeleteUserMutation = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -450,6 +436,7 @@ export type CreateLabelIssuesMutation = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -482,6 +469,7 @@ export type UpdateLabelIssuesMutation = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -514,6 +502,7 @@ export type DeleteLabelIssuesMutation = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -534,10 +523,8 @@ export type CreateCommentMutation = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -559,10 +546,8 @@ export type UpdateCommentMutation = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -584,10 +569,8 @@ export type DeleteCommentMutation = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -604,15 +587,6 @@ export type CreateIssueMutation = {
   createIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -625,6 +599,7 @@ export type CreateIssueMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -637,15 +612,6 @@ export type UpdateIssueMutation = {
   updateIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -658,6 +624,7 @@ export type UpdateIssueMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -670,15 +637,6 @@ export type DeleteIssueMutation = {
   deleteIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -691,6 +649,7 @@ export type DeleteIssueMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -703,10 +662,8 @@ export type GetUserQuery = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -723,10 +680,8 @@ export type ListUsersQuery = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
@@ -785,10 +740,8 @@ export type GetCommentQuery = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -825,15 +778,6 @@ export type GetIssueQuery = {
   getIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -846,6 +790,7 @@ export type GetIssueQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -865,6 +810,7 @@ export type ListIssuesQuery = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
@@ -875,10 +821,8 @@ export type OnCreateUserSubscription = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -887,10 +831,8 @@ export type OnUpdateUserSubscription = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -899,10 +841,8 @@ export type OnDeleteUserSubscription = {
     __typename: "User",
     id: string,
     email: string,
-    registeredAt: string,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -972,6 +912,7 @@ export type OnCreateLabelIssuesSubscription = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -999,6 +940,7 @@ export type OnUpdateLabelIssuesSubscription = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1026,6 +968,7 @@ export type OnDeleteLabelIssuesSubscription = {
       text: string,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
@@ -1041,10 +984,8 @@ export type OnCreateCommentSubscription = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -1061,10 +1002,8 @@ export type OnUpdateCommentSubscription = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -1081,10 +1020,8 @@ export type OnDeleteCommentSubscription = {
       __typename: "User",
       id: string,
       email: string,
-      registeredAt: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     text: string,
     createdAt: string,
@@ -1096,15 +1033,6 @@ export type OnCreateIssueSubscription = {
   onCreateIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -1117,6 +1045,7 @@ export type OnCreateIssueSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1124,15 +1053,6 @@ export type OnUpdateIssueSubscription = {
   onUpdateIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -1145,6 +1065,7 @@ export type OnUpdateIssueSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1152,15 +1073,6 @@ export type OnDeleteIssueSubscription = {
   onDeleteIssue?:  {
     __typename: "Issue",
     id: string,
-    creator:  {
-      __typename: "User",
-      id: string,
-      email: string,
-      registeredAt: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     title: string,
     text: string,
     comments?:  {
@@ -1173,5 +1085,6 @@ export type OnDeleteIssueSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };

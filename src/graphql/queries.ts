@@ -7,10 +7,8 @@ export const getUser = /* GraphQL */ `
     getUser(id: $id) {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -24,10 +22,8 @@ export const listUsers = /* GraphQL */ `
       items {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -73,10 +69,8 @@ export const getComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -106,14 +100,6 @@ export const getIssue = /* GraphQL */ `
   query GetIssue($id: ID!) {
     getIssue(id: $id) {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -124,6 +110,7 @@ export const getIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -140,6 +127,7 @@ export const listIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

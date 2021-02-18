@@ -10,10 +10,8 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -25,10 +23,8 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -40,10 +36,8 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -120,6 +114,7 @@ export const createLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -148,6 +143,7 @@ export const updateLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -176,6 +172,7 @@ export const deleteLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -193,10 +190,8 @@ export const createComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -215,10 +210,8 @@ export const updateComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -237,10 +230,8 @@ export const deleteComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -255,14 +246,6 @@ export const createIssue = /* GraphQL */ `
   ) {
     createIssue(input: $input, condition: $condition) {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -273,6 +256,7 @@ export const createIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -283,14 +267,6 @@ export const updateIssue = /* GraphQL */ `
   ) {
     updateIssue(input: $input, condition: $condition) {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -301,6 +277,7 @@ export const updateIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -311,14 +288,6 @@ export const deleteIssue = /* GraphQL */ `
   ) {
     deleteIssue(input: $input, condition: $condition) {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -329,6 +298,7 @@ export const deleteIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

@@ -7,10 +7,8 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -19,10 +17,8 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -31,10 +27,8 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser {
       id
       email
-      registeredAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -99,6 +93,7 @@ export const onCreateLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -124,6 +119,7 @@ export const onUpdateLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -149,6 +145,7 @@ export const onDeleteLabelIssues = /* GraphQL */ `
         text
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -163,10 +160,8 @@ export const onCreateComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -182,10 +177,8 @@ export const onUpdateComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -201,10 +194,8 @@ export const onDeleteComment = /* GraphQL */ `
       creator {
         id
         email
-        registeredAt
         createdAt
         updatedAt
-        owner
       }
       text
       createdAt
@@ -216,14 +207,6 @@ export const onCreateIssue = /* GraphQL */ `
   subscription OnCreateIssue {
     onCreateIssue {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -234,6 +217,7 @@ export const onCreateIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -241,14 +225,6 @@ export const onUpdateIssue = /* GraphQL */ `
   subscription OnUpdateIssue {
     onUpdateIssue {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -259,6 +235,7 @@ export const onUpdateIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -266,14 +243,6 @@ export const onDeleteIssue = /* GraphQL */ `
   subscription OnDeleteIssue {
     onDeleteIssue {
       id
-      creator {
-        id
-        email
-        registeredAt
-        createdAt
-        updatedAt
-        owner
-      }
       title
       text
       comments {
@@ -284,6 +253,7 @@ export const onDeleteIssue = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
