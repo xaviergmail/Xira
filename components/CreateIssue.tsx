@@ -1,11 +1,11 @@
 import { API, Auth, graphqlOperation } from "aws-amplify"
 import { Formik, Form, Field, FormikHelpers } from "formik"
 
-import { CreateIssueMutation } from "../src/API"
+import * as Model from "../src/API"
 
 import { createIssue } from "../src/graphql/mutations"
 
-interface IssueFormData {}
+type IssueFormData = Partial<Model.Issue>
 
 function getInitialValues(): IssueFormData {
   return {
@@ -21,14 +21,13 @@ export default function CreateIssue() {
   ) {
     const cognitoUser = await Auth.currentUserInfo()
     if (cognitoUser) {
-      debugger
       const issue = (await API.graphql(
         graphqlOperation(createIssue, {
           input: { ...values },
         })
-      )) as { data: CreateIssueMutation }
+      )) as { data: Model.CreateIssueMutation }
 
-      actions.resetForm(getInitialValues())
+      actions.resetForm({ values: getInitialValues() })
     }
   }
 
