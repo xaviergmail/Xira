@@ -16,6 +16,7 @@ import User, { UserInfo } from "../src/store/user"
 import { CreateUserMutation, GetUserQuery } from "../src/API"
 import { createUser } from "../src/graphql/mutations"
 import { getUser } from "../src/graphql/queries"
+import NavBar from "../components/NavBar"
 
 Amplify.configure({
   ...config,
@@ -94,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <div>
+    <div className="bg-gray-50">
       <AmplifyAuthenticator>
         <AmplifySignUp
           slot="sign-up"
@@ -121,15 +122,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           ]}
         />
         <AmplifySignIn slot="sign-in" />
+        <NavBar />
         {user ? (
           <div>
-            <AmplifySignOut slot="sign-out" />
             <Component {...pageProps} />
           </div>
         ) : (
           <h1>Loading user...</h1>
         )}
-        f
       </AmplifyAuthenticator>
     </div>
   )

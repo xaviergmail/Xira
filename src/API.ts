@@ -122,6 +122,7 @@ export type LabelIssues = {
   issue?: Issue,
   createdAt?: string,
   updatedAt?: string,
+  owner?: string | null,
 };
 
 export type Issue = {
@@ -146,10 +147,11 @@ export type Comment = {
   __typename: "Comment",
   id?: string,
   issueID?: string,
-  creator?: User,
   text?: string,
+  issue?: Issue,
   createdAt?: string,
   updatedAt?: string,
+  owner?: string | null,
 };
 
 export type UpdateLabelInput = {
@@ -206,7 +208,6 @@ export type CreateCommentInput = {
   id?: string | null,
   issueID: string,
   text: string,
-  commentCreatorId: string,
 };
 
 export type ModelCommentConditionInput = {
@@ -221,7 +222,6 @@ export type UpdateCommentInput = {
   id: string,
   issueID?: string | null,
   text?: string | null,
-  commentCreatorId?: string | null,
 };
 
 export type DeleteCommentInput = {
@@ -305,6 +305,41 @@ export type ModelIssueConnection = {
   nextToken?: string | null,
 };
 
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelLabelIssuesFilterInput = {
+  id?: ModelIDInput | null,
+  labelID?: ModelIDInput | null,
+  issueID?: ModelIDInput | null,
+  and?: Array< ModelLabelIssuesFilterInput | null > | null,
+  or?: Array< ModelLabelIssuesFilterInput | null > | null,
+  not?: ModelLabelIssuesFilterInput | null,
+};
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
 export type CreateUserMutationVariables = {
   input?: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -363,6 +398,15 @@ export type CreateLabelMutation = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -383,6 +427,15 @@ export type UpdateLabelMutation = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -403,6 +456,15 @@ export type DeleteLabelMutation = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -426,6 +488,10 @@ export type CreateLabelIssuesMutation = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -434,12 +500,21 @@ export type CreateLabelIssuesMutation = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -459,6 +534,10 @@ export type UpdateLabelIssuesMutation = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -467,12 +546,21 @@ export type UpdateLabelIssuesMutation = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -492,6 +580,10 @@ export type DeleteLabelIssuesMutation = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -500,12 +592,21 @@ export type DeleteLabelIssuesMutation = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -519,16 +620,27 @@ export type CreateCommentMutation = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -542,16 +654,27 @@ export type UpdateCommentMutation = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -565,16 +688,27 @@ export type DeleteCommentMutation = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -591,10 +725,28 @@ export type CreateIssueMutation = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -616,10 +768,28 @@ export type UpdateIssueMutation = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -641,10 +811,28 @@ export type DeleteIssueMutation = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -699,6 +887,15 @@ export type GetLabelQuery = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -720,6 +917,10 @@ export type ListLabelsQuery = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -736,16 +937,27 @@ export type GetCommentQuery = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -763,8 +975,18 @@ export type ListCommentsQuery = {
       id: string,
       issueID: string,
       text: string,
+      issue:  {
+        __typename: "Issue",
+        id: string,
+        title: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
@@ -782,10 +1004,28 @@ export type GetIssueQuery = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -808,6 +1048,132 @@ export type ListIssuesQuery = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type IssuesByLabelQueryVariables = {
+  labelID?: string | null,
+  issueID?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelLabelIssuesFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type IssuesByLabelQuery = {
+  issuesByLabel?:  {
+    __typename: "ModelLabelIssuesConnection",
+    items?:  Array< {
+      __typename: "LabelIssues",
+      id: string,
+      labelID: string,
+      issueID: string,
+      label:  {
+        __typename: "Label",
+        id: string,
+        name?: string | null,
+        color?: number | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      issue:  {
+        __typename: "Issue",
+        id: string,
+        title: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type LabelsByIssueQueryVariables = {
+  issueID?: string | null,
+  labelID?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelLabelIssuesFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type LabelsByIssueQuery = {
+  labelsByIssue?:  {
+    __typename: "ModelLabelIssuesConnection",
+    items?:  Array< {
+      __typename: "LabelIssues",
+      id: string,
+      labelID: string,
+      issueID: string,
+      label:  {
+        __typename: "Label",
+        id: string,
+        name?: string | null,
+        color?: number | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      issue:  {
+        __typename: "Issue",
+        id: string,
+        title: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type CommentsByIssueQueryVariables = {
+  issueID?: string | null,
+  text?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type CommentsByIssueQuery = {
+  commentsByIssue?:  {
+    __typename: "ModelCommentConnection",
+    items?:  Array< {
+      __typename: "Comment",
+      id: string,
+      issueID: string,
+      text: string,
+      issue:  {
+        __typename: "Issue",
+        id: string,
+        title: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      },
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -854,6 +1220,15 @@ export type OnCreateLabelSubscription = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -869,6 +1244,15 @@ export type OnUpdateLabelSubscription = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -884,6 +1268,15 @@ export type OnDeleteLabelSubscription = {
     color?: number | null,
     issues?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -902,6 +1295,10 @@ export type OnCreateLabelIssuesSubscription = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -910,12 +1307,21 @@ export type OnCreateLabelIssuesSubscription = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -930,6 +1336,10 @@ export type OnUpdateLabelIssuesSubscription = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -938,12 +1348,21 @@ export type OnUpdateLabelIssuesSubscription = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -958,6 +1377,10 @@ export type OnDeleteLabelIssuesSubscription = {
       id: string,
       name?: string | null,
       color?: number | null,
+      issues?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -966,12 +1389,21 @@ export type OnDeleteLabelIssuesSubscription = {
       id: string,
       title: string,
       text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -980,16 +1412,27 @@ export type OnCreateCommentSubscription = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -998,16 +1441,27 @@ export type OnUpdateCommentSubscription = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1016,16 +1470,27 @@ export type OnDeleteCommentSubscription = {
     __typename: "Comment",
     id: string,
     issueID: string,
-    creator:  {
-      __typename: "User",
+    text: string,
+    issue:  {
+      __typename: "Issue",
       id: string,
-      email: string,
+      title: string,
+      text: string,
+      comments?:  {
+        __typename: "ModelCommentConnection",
+        nextToken?: string | null,
+      } | null,
+      labels?:  {
+        __typename: "ModelLabelIssuesConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     },
-    text: string,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1037,10 +1502,28 @@ export type OnCreateIssueSubscription = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1057,10 +1540,28 @@ export type OnUpdateIssueSubscription = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1077,10 +1578,28 @@ export type OnDeleteIssueSubscription = {
     text: string,
     comments?:  {
       __typename: "ModelCommentConnection",
+      items?:  Array< {
+        __typename: "Comment",
+        id: string,
+        issueID: string,
+        text: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     labels?:  {
       __typename: "ModelLabelIssuesConnection",
+      items?:  Array< {
+        __typename: "LabelIssues",
+        id: string,
+        labelID: string,
+        issueID: string,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
       nextToken?: string | null,
     } | null,
     createdAt: string,

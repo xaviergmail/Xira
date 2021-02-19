@@ -27,5 +27,35 @@
         "xiraAuth": {}
       }
     }
+  },
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-xira-develop-195949-authRole",
+      "UnauthRoleArn": "arn:aws:iam::736335554218:role/amplify-xira-develop-195949-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::736335554218:role/amplify-xira-develop-195949-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-xira-develop-195949-deployment",
+      "UnauthRoleName": "amplify-xira-develop-195949-unauthRole",
+      "StackName": "amplify-xira-develop-195949",
+      "StackId": "arn:aws:cloudformation:us-east-1:736335554218:stack/amplify-xira-develop-195949/ee6773c0-7266-11eb-83c0-12a640cb526e",
+      "AmplifyAppId": "d3ihe7yoakdxjc"
+    },
+    "categories": {
+      "auth": {
+        "userPoolGroups": {},
+        "xiraAuth": {}
+      },
+      "function": {
+        "xiraAuthPostConfirmation": {
+          "GROUP": "Registered",
+          "deploymentBucketName": "amplify-xira-develop-195949-deployment",
+          "s3Key": "amplify-builds/xiraAuthPostConfirmation-41766d4c626b6930356e-build.zip"
+        },
+        "AdminQueriesa02ab228": {
+          "deploymentBucketName": "amplify-xira-develop-195949-deployment",
+          "s3Key": "amplify-builds/AdminQueriesa02ab228-72464f6136585961562b-build.zip"
+        }
+      }
+    }
   }
 }

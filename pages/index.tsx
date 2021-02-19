@@ -17,7 +17,6 @@ export default function Home() {
       <main>
         <h1>Welcome to Xira!</h1>
         <IssueList />
-        <CreateIssue />
       </main>
     </div>
   )

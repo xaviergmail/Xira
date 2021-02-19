@@ -51,6 +51,14 @@ export const createLabel = /* GraphQL */ `
       name
       color
       issues {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -68,6 +76,14 @@ export const updateLabel = /* GraphQL */ `
       name
       color
       issues {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -85,6 +101,14 @@ export const deleteLabel = /* GraphQL */ `
       name
       color
       issues {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -105,6 +129,9 @@ export const createLabelIssues = /* GraphQL */ `
         id
         name
         color
+        issues {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -112,12 +139,19 @@ export const createLabelIssues = /* GraphQL */ `
         id
         title
         text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -134,6 +168,9 @@ export const updateLabelIssues = /* GraphQL */ `
         id
         name
         color
+        issues {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -141,12 +178,19 @@ export const updateLabelIssues = /* GraphQL */ `
         id
         title
         text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -163,6 +207,9 @@ export const deleteLabelIssues = /* GraphQL */ `
         id
         name
         color
+        issues {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -170,12 +217,19 @@ export const deleteLabelIssues = /* GraphQL */ `
         id
         title
         text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -187,15 +241,24 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       issueID
-      creator {
+      text
+      issue {
         id
-        email
+        title
+        text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
+        owner
       }
-      text
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -207,15 +270,24 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       issueID
-      creator {
+      text
+      issue {
         id
-        email
+        title
+        text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
+        owner
       }
-      text
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -227,15 +299,24 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       issueID
-      creator {
+      text
+      issue {
         id
-        email
+        title
+        text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
+        owner
       }
-      text
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -249,9 +330,25 @@ export const createIssue = /* GraphQL */ `
       title
       text
       comments {
+        items {
+          id
+          issueID
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       labels {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -270,9 +367,25 @@ export const updateIssue = /* GraphQL */ `
       title
       text
       comments {
+        items {
+          id
+          issueID
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       labels {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -291,9 +404,25 @@ export const deleteIssue = /* GraphQL */ `
       title
       text
       comments {
+        items {
+          id
+          issueID
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       labels {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt

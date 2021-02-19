@@ -13,7 +13,7 @@ export default function IssueList() {
 
   useEffect(() => {
     getIssues()
-    subscribeNewIssues()
+    subscribeIssues()
   }, [])
 
   async function getIssues() {
@@ -27,7 +27,7 @@ export default function IssueList() {
     updateIssues(issues)
   }
 
-  async function subscribeNewIssues() {
+  async function subscribeIssues() {
     const observable = (await API.graphql(
       graphqlOperation(onCreateIssue)
     )) as Observable<any>
@@ -47,8 +47,8 @@ export default function IssueList() {
   return (
     <div>
       {issues.map((issue) => (
-        <Link href={"/issue/" + issue.id}>
-          <div key={issue.id} className="bg-gray-300 odd:bg-gray-200">
+        <Link href={"/issue/" + issue.id} key={issue.id}>
+          <div className="bg-gray-300 odd:bg-gray-200">
             <h1>{issue.title}</h1>
           </div>
         </Link>

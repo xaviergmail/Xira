@@ -41,42 +41,42 @@ type Label
   id: ID!
   name: String
   color: Int
-  # issues: [LabelIssues] @connection(keyName: "issuesByLabel", fields: ["id"])
+  issues: [LabelIssues] @connection(keyName: "issuesByLabel", fields: ["id"])
 }
 
 type LabelIssues
   @model(queries: null)
-  # @key(
-  #   name: "issuesByLabel"
-  #   fields: ["labelID", "issueID"]
-  #   queryField: "issuesByLabel"
-  # )
-  # @key(
-  #   name: "labelsByIssue"
-  #   fields: ["issueID", "labelID"]
-  #   queryField: "labelsByIssue"
-  # )
+  @key(
+    name: "issuesByLabel"
+    fields: ["labelID", "issueID"]
+    queryField: "issuesByLabel"
+  )
+  @key(
+    name: "labelsByIssue"
+    fields: ["issueID", "labelID"]
+    queryField: "labelsByIssue"
+  )
   @auth(rules: [{ allow: owner, operations: [create, update] }]) {
   id: ID!
   labelID: ID!
   issueID: ID!
 
-  # label: Label! @connection(fields: ["labelID"])
-  # issue: Issue! @connection(fields: ["issueID"])
+  label: Label! @connection(fields: ["labelID"])
+  issue: Issue! @connection(fields: ["issueID"])
 }
 
 type Comment
   @model
-  # @key(
-  #   name: "commentsByIssue"
-  #   fields: ["issueID", "text"]
-  #   queryField: "commentsByIssue"
-  # )
+  @key(
+    name: "commentsByIssue"
+    fields: ["issueID", "text"]
+    queryField: "commentsByIssue"
+  )
   @auth(rules: [{ allow: owner, operations: [create, update] }]) {
   id: ID!
   issueID: ID!
   text: String!
-  # issue: Issue! @connection(fields: ["issueID"])
+  issue: Issue! @connection(fields: ["issueID"])
 }
 
 type Issue
@@ -85,6 +85,6 @@ type Issue
   id: ID!
   title: String!
   text: String!
-  # comments: [Comment] @connection(keyName: "commentsByIssue", fields: ["id"])
-  # labels: [LabelIssues] @connection(keyName: "labelsByIssue", fields: ["id"])
+  comments: [Comment] @connection(keyName: "commentsByIssue", fields: ["id"])
+  labels: [LabelIssues] @connection(keyName: "labelsByIssue", fields: ["id"])
 }

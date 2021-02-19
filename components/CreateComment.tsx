@@ -1,7 +1,7 @@
 import { API, Auth, graphqlOperation } from "aws-amplify"
 import { Formik, Form, Field, FormikHelpers } from "formik"
 
-import * as Model from "../../src/API"
+import * as Model from "../src/API"
 import { createComment } from "../src/graphql/mutations"
 
 type CommentFormData = Partial<Model.Comment>

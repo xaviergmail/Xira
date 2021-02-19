@@ -36,6 +36,14 @@ export const getLabel = /* GraphQL */ `
       name
       color
       issues {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -54,6 +62,9 @@ export const listLabels = /* GraphQL */ `
         id
         name
         color
+        issues {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -66,15 +77,24 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       issueID
-      creator {
+      text
+      issue {
         id
-        email
+        title
+        text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
         createdAt
         updatedAt
+        owner
       }
-      text
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -89,8 +109,17 @@ export const listComments = /* GraphQL */ `
         id
         issueID
         text
+        issue {
+          id
+          title
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -103,9 +132,25 @@ export const getIssue = /* GraphQL */ `
       title
       text
       comments {
+        items {
+          id
+          issueID
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       labels {
+        items {
+          id
+          labelID
+          issueID
+          createdAt
+          updatedAt
+          owner
+        }
         nextToken
       }
       createdAt
@@ -125,6 +170,137 @@ export const listIssues = /* GraphQL */ `
         id
         title
         text
+        comments {
+          nextToken
+        }
+        labels {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const issuesByLabel = /* GraphQL */ `
+  query IssuesByLabel(
+    $labelID: ID
+    $issueID: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelLabelIssuesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    issuesByLabel(
+      labelID: $labelID
+      issueID: $issueID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        labelID
+        issueID
+        label {
+          id
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        issue {
+          id
+          title
+          text
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const labelsByIssue = /* GraphQL */ `
+  query LabelsByIssue(
+    $issueID: ID
+    $labelID: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelLabelIssuesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    labelsByIssue(
+      issueID: $issueID
+      labelID: $labelID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        labelID
+        issueID
+        label {
+          id
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        issue {
+          id
+          title
+          text
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const commentsByIssue = /* GraphQL */ `
+  query CommentsByIssue(
+    $issueID: ID
+    $text: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentsByIssue(
+      issueID: $issueID
+      text: $text
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        issueID
+        text
+        issue {
+          id
+          title
+          text
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner
