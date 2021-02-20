@@ -6,7 +6,7 @@ import "../styles/tw-before.css"
 import "../styles/application.css"
 import "../styles/tw-after.css"
 
-import Layout from "../components/Layout"
+import Layout from "./components/Layout"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

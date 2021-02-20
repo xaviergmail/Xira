@@ -5,13 +5,13 @@ import {
 } from "@aws-amplify/ui-react"
 
 import Amplify, { API, Auth, graphqlOperation, Hub } from "aws-amplify"
-import config from "../src/aws-exports.js"
+import config from "../aws-exports.js"
 import React, { ReactNode, useEffect, useState } from "react"
 
-import User, { UserInfo } from "../src/store/user"
-import { CreateUserMutation, GetUserQuery } from "../src/API"
-import { createUser } from "../src/graphql/mutations"
-import { getUser } from "../src/graphql/queries"
+import User, { UserInfo } from "../store/user"
+import { CreateUserMutation, GetUserQuery } from "../API"
+import { createUser } from "../graphql/mutations"
+import { getUser } from "../graphql/queries"
 import NavBar from "./NavBar"
 
 Amplify.configure({
