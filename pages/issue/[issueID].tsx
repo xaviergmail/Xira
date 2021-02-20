@@ -1,6 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { getIssue } from "../../src/graphql/queries"
 import Observable from "zen-observable-ts"
 

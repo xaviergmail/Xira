@@ -1,5 +1,5 @@
 import { AmplifySignOut } from "@aws-amplify/ui-react"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import { UserContext } from "../src/store/user"
 
 export default function NavBar() {
@@ -8,7 +8,7 @@ export default function NavBar() {
     <header>
       <nav className="flex bg-white border-b border-gray-300 items-center justify-between">
         <a className="border-r border-gray-700">Home</a>
-        <p className="flex-grow text-ltext-lg g font-bold">
+        <p className="flex-grow text-ltext-lg g font-bold bolder tests">
           Welcome, {user?.attributes?.name}
         </p>
         <a

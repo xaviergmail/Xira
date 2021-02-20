@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import CreateIssue from "../components/CreateIssue"
 import IssueList from "../components/IssueList"
 import { UserContext } from "../src/store/user"
@@ -8,9 +8,9 @@ export default function Home() {
   const user = useContext(UserContext)
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto p-2">
       <Head>
-        <title></title>
+        <title>cool title</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
