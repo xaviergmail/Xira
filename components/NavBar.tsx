@@ -5,10 +5,10 @@ import { UserContext } from "../src/store/user"
 export default function NavBar() {
   const user = useContext(UserContext)
   return (
-    <header>
-      <nav className="flex bg-white border-b border-gray-300 items-center justify-between">
+    <header className="bg-white border-b border-gray-300">
+      <nav className="container mx-auto flex items-center justify-between">
         <a className="border-r border-gray-700">Home</a>
-        <p className="flex-grow text-ltext-lg g font-bold bolder tests">
+        <p className="flex-grow text-ltext-lg g font-bold bolder tests ok">
           Welcome, {user?.attributes?.name}
         </p>
         <a
