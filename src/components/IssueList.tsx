@@ -4,7 +4,7 @@ import { CreateIssueMutation, Issue, ListIssuesQuery } from "../API"
 import { listIssues } from "../graphql/queries"
 import { onCreateIssue } from "../graphql/subscriptions"
 import Observable from "zen-observable-ts"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export interface IAppProps {}
 
@@ -47,7 +47,7 @@ export default function IssueList() {
   return (
     <div>
       {issues.map((issue) => (
-        <Link href={"/issue/" + issue.id} key={issue.id}>
+        <Link to={"/issue/" + issue.id} key={issue.id}>
           <div className="bg-gray-300 odd:bg-gray-200">
             <h1>{issue.title}</h1>
           </div>

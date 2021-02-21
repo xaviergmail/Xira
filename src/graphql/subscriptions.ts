@@ -124,6 +124,7 @@ export const onCreateLabelIssues = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -160,6 +161,7 @@ export const onUpdateLabelIssues = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -196,6 +198,7 @@ export const onDeleteLabelIssues = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -222,6 +225,7 @@ export const onCreateComment = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -248,6 +252,7 @@ export const onUpdateComment = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -274,6 +279,7 @@ export const onDeleteComment = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -312,6 +318,7 @@ export const onCreateIssue = /* GraphQL */ `
         }
         nextToken
       }
+      status
       createdAt
       updatedAt
       owner
@@ -346,6 +353,7 @@ export const onUpdateIssue = /* GraphQL */ `
         }
         nextToken
       }
+      status
       createdAt
       updatedAt
       owner
@@ -380,6 +388,7 @@ export const onDeleteIssue = /* GraphQL */ `
         }
         nextToken
       }
+      status
       createdAt
       updatedAt
       owner

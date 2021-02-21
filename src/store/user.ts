@@ -5,14 +5,10 @@ export interface UserAttributes {
   name: String,
 }
 
-export interface UserInfo {
-  __typename: String
-  id: String
-}
 
-export default interface User {
+export default interface CognitoUser {
   username: String
   attributes?: UserAttributes
 }
 
-export const UserContext = React.createContext<User>(null)
+export const UserContext = React.createContext<CognitoUser>(null)

@@ -8,8 +8,8 @@ import Amplify, { API, Auth, graphqlOperation, Hub } from "aws-amplify"
 import config from "../aws-exports.js"
 import React, { ReactNode, useEffect, useState } from "react"
 
-import User, { UserInfo } from "../store/user"
-import { CreateUserMutation, GetUserQuery } from "../API"
+import CognitoUser, { UserContext } from "../store/user"
+import { CreateUserMutation, GetUserQuery, User } from "../API"
 import { createUser } from "../graphql/mutations"
 import { getUser } from "../graphql/queries"
 import NavBar from "./NavBar"
@@ -24,11 +24,11 @@ type Props = {
 }
 
 export default function Layout({ children }: Props) {
-  const [user, setUser] = useState<User>()
+  const [user, setUser] = useState<CognitoUser>()
 
   async function getUserData() {
     const cognitoUser = await Auth.currentUserInfo()
-    if (user && user.username == cognitoUser.username) {
+    if (user && user.username === cognitoUser.username) {
       return
     }
 
@@ -42,10 +42,13 @@ export default function Layout({ children }: Props) {
         data: GetUserQuery
       }
 
-      const updateUser = (newUser: UserInfo) =>
+      const updateUser = (newUser: User) =>
         setUser((curUser) => {
-          if (newUser.id != curUser?.username) {
-            return { username: newUser.id }
+          if (newUser.id !== curUser?.username) {
+            return {
+              username: cognitoUser.username,
+              attributes: cognitoUser.attributes,
+            }
           }
 
           return curUser
@@ -95,34 +98,36 @@ export default function Layout({ children }: Props) {
   })
 
   return (
-    <AmplifyAuthenticator>
-      <AmplifySignUp
-        slot="sign-up"
-        usernameAlias="username"
-        formFields={[
-          {
-            type: "username",
-            required: true,
-          },
-          {
-            type: "name",
-            placeholder: "Enter your first and last name",
-            label: "Name *",
-            required: true,
-          },
-          {
-            type: "email",
-            required: true,
-          },
-          {
-            type: "password",
-            required: true,
-          },
-        ]}
-      />
-      <AmplifySignIn slot="sign-in" />
-      <NavBar />
-      {user ? children : <h1>Loading user...</h1>}
-    </AmplifyAuthenticator>
+    <UserContext.Provider value={user}>
+      <AmplifyAuthenticator>
+        <AmplifySignUp
+          slot="sign-up"
+          usernameAlias="username"
+          formFields={[
+            {
+              type: "username",
+              required: true,
+            },
+            {
+              type: "name",
+              placeholder: "Enter your first and last name",
+              label: "Name *",
+              required: true,
+            },
+            {
+              type: "email",
+              required: true,
+            },
+            {
+              type: "password",
+              required: true,
+            },
+          ]}
+        />
+        <AmplifySignIn slot="sign-in" />
+        <NavBar />
+        {user ? children : <h1>Loading user...</h1>}
+      </AmplifyAuthenticator>
+    </UserContext.Provider>
   )
 }

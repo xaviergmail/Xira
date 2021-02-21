@@ -88,6 +88,7 @@ export const getComment = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -113,6 +114,7 @@ export const listComments = /* GraphQL */ `
           id
           title
           text
+          status
           createdAt
           updatedAt
           owner
@@ -153,6 +155,7 @@ export const getIssue = /* GraphQL */ `
         }
         nextToken
       }
+      status
       createdAt
       updatedAt
       owner
@@ -176,6 +179,7 @@ export const listIssues = /* GraphQL */ `
         labels {
           nextToken
         }
+        status
         createdAt
         updatedAt
         owner
@@ -216,6 +220,7 @@ export const issuesByLabel = /* GraphQL */ `
           id
           title
           text
+          status
           createdAt
           updatedAt
           owner
@@ -260,6 +265,7 @@ export const labelsByIssue = /* GraphQL */ `
           id
           title
           text
+          status
           createdAt
           updatedAt
           owner
@@ -297,6 +303,7 @@ export const commentsByIssue = /* GraphQL */ `
           id
           title
           text
+          status
           createdAt
           updatedAt
           owner

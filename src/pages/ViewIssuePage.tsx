@@ -1,17 +1,18 @@
 import { API, graphqlOperation } from "aws-amplify"
-import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { getIssue } from "../../src/graphql/queries"
 import Observable from "zen-observable-ts"
 
-import CreateComment from "../../components/CreateComment"
+import CreateComment from "../components/CreateComment"
 
 import * as Model from "../../src/API"
 import { onCreateComment } from "../../src/graphql/subscriptions"
+import { useParams } from "react-router-dom"
+
+type RouteParams = { issueID: string }
 
 export default function ViewIssue() {
-  const router = useRouter()
-  const { issueID } = router.query
+  const { issueID } = useParams<RouteParams>()
 
   const [issue, setIssue] = useState<Model.Issue>()
 

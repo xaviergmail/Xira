@@ -1,23 +1,49 @@
-import { AmplifySignOut } from "@aws-amplify/ui-react"
+import { Auth } from "aws-amplify"
 import React, { useContext } from "react"
 import { UserContext } from "../store/user"
+
+async function signOut() {
+  await Auth.signOut()
+}
+
+function Spacer(props) {
+  return (
+    <div
+      className="border-r border-gray-200 w-px self-stretch mx-4"
+      {...props}
+    ></div>
+  )
+}
 
 export default function NavBar() {
   const user = useContext(UserContext)
   return (
-    <header className="bg-white border-b border-gray-300">
-      <nav className="container mx-auto flex items-center justify-between">
-        <a className="border-r border-gray-700">Home</a>
-        <p className="flex-grow text-ltext-lg g font-bold bolder tests ok">
-          Welcome, {user?.attributes?.name}
+    <header className="bg-white border-b border-gray-200 shadow-sm">
+      <nav className="container mx-auto flex items-baseline justify-between p-2">
+        <a className="" href="/">
+          <h1>XIRA</h1>
+        </a>
+        <div className="border-r border-gray-300 w-px mx-4 self-stretch my-4"></div>
+        <a className="" href="/">
+          <h1>Home</h1>
+        </a>
+        <Spacer />
+        <p className="flex-grow font-bold bolder tests ok">
+          Logged in as {user?.username}
         </p>
         <a
-          className="block text-lg text-white bg-green-600 font-bold align-middle h-100 px-4 py-1 m-4 hover:bg-green-400 active:bg-green-500 rounded-xl shadow-lg"
-          href="/create-issue"
+          href="/new-issue"
+          className="text-white font-bold align-middle bg-green-600 p-2 mx-4 hover:bg-green-500 active:bg-green-600 rounded-md"
         >
           New Issue
         </a>
-        <AmplifySignOut />
+
+        <button
+          className="bg-red-600 p-2 text-white rounded-md align-middle hover:bg-red-500 active:bg-red-700"
+          onClick={signOut}
+        >
+          Sign Out
+        </button>
       </nav>
     </header>
   )

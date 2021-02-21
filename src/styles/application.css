@@ -1,5 +1,4 @@
 /* custom styles */
 h1 {
   @apply text-2xl;
-  @apply uppercase;
 }
