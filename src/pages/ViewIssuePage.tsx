@@ -154,7 +154,7 @@ export default function ViewIssue() {
             </div>
 
             {issue.comments?.items?.map((comment) => (
-              <div>
+              <div key={comment.id}>
                 <VSpacer />
                 <div className="flex">
                   <div className="flex flex-col">

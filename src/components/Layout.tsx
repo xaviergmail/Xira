@@ -33,9 +33,6 @@ export default function Layout({ children }: Props) {
 
   async function getUserData() {
     const cognitoUser = await Auth.currentUserInfo()
-    if (loading) {
-      setLoading(false)
-    }
     if (user && user.username === cognitoUser.username) {
       return
     }
@@ -50,7 +47,11 @@ export default function Layout({ children }: Props) {
         data: GetUserQuery
       }
 
-      const updateUser = (newUser: User) =>
+      const updateUser = (newUser: User) => {
+        if (loading) {
+          setLoading(false)
+        }
+
         setUser((curUser) => {
           if (newUser.id !== curUser?.username) {
             return {
@@ -61,6 +62,7 @@ export default function Layout({ children }: Props) {
 
           return curUser
         })
+      }
 
       const result = userData?.data?.getUser
       if (result) {

@@ -27,7 +27,7 @@ function CreateCommentComponent({
   issue,
   disabled,
 }: CreateCommentComponentProps) {
-  const { values }: { values: { text: string } } = useFormikContext()
+  const { values, submitForm } = useFormikContext<CommentFormData>()
 
   const [modifying, setModifying] = React.useState(false)
 
@@ -39,12 +39,18 @@ function CreateCommentComponent({
 
   async function closeIssue() {
     setModifying(true)
+    if (values.text) {
+      submitForm()
+    }
     await updateStatus("closed")
     setModifying(false)
   }
 
   async function openIssue() {
     setModifying(true)
+    if (values.text) {
+      submitForm()
+    }
     await updateStatus("open")
     setModifying(false)
   }

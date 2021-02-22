@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { HashRouter as Router, Switch, Route } from "react-router-dom"
 
 import "./styles/tw-before.css"
 import "./styles/application.css"

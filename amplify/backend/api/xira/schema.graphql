@@ -1,21 +1,3 @@
-# type Task
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: groups, groups: ["Managers"], queries: null, mutations: [create, update, delete] }
-#       { allow: groups, groups: ["Employees"], queries: [get, list], mutations: null }
-#     ]
-#   ) {
-#   id: ID!
-#   title: String!
-#   description: String
-#   status: String
-# }
-# type PrivateNote @model @auth(rules: [{ allow: owner }]) {
-#   id: ID!
-#   content: String!
-# }
-
 type User
   @model
   @auth(
@@ -29,13 +11,8 @@ type Label
   @model
   @auth(
     rules: [
-      {
-        allow: groups
-        groups: ["Admin"]
-        queries: null
-        mutations: [create, update, delete]
-      }
-      { allow: private, queries: [get, list], mutations: null }
+      { allow: groups, groups: ["Admin"], operations: [create, update, delete] }
+      { allow: private, operations: [read] }
     ]
   ) {
   id: ID!
@@ -72,7 +49,13 @@ type Comment
     fields: ["issueID", "text"]
     queryField: "commentsByIssue"
   )
-  @auth(rules: [{ allow: owner, operations: [create, update] }]) {
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admin"], operations: [create, update, delete] }
+      { allow: owner, operations: [create, update] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   issueID: ID!
   text: String!
@@ -81,7 +64,13 @@ type Comment
 
 type Issue
   @model
-  @auth(rules: [{ allow: owner, operations: [create, update] }]) {
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admin"], operations: [create, update, delete] }
+      { allow: owner, operations: [create, update] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   title: String!
   text: String!

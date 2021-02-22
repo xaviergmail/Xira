@@ -13,6 +13,8 @@ import gql from "graphql-tag"
 import { lastUpdated, sortCreatedAtNewest } from "../util"
 import IssueStatus from "./IssueStatus"
 
+import RingLoader from "react-spinners/RingLoader"
+
 export interface IAppProps {}
 
 function IssuePreview({ issue }: { issue: Issue }) {
@@ -76,6 +78,8 @@ const listIssues = gql`
 export default function IssueList() {
   const [issues, updateIssues] = useState<Array<Issue>>([])
 
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     getIssues()
     subscribeIssues()
@@ -89,6 +93,8 @@ export default function IssueList() {
     } = (await API.graphql(graphqlOperation(listIssues))) as {
       data: ListIssuesQuery
     }
+
+    setLoading(false)
 
     sortCreatedAtNewest(issues)
     console.log("issues", issues, "issues")
@@ -114,11 +120,17 @@ export default function IssueList() {
 
   return (
     <div className=" mx-auto flex flex-col divide-y divide-gray-200">
-      {issues.map((issue) => (
-        <div key={issue.id}>
-          <IssuePreview issue={issue} />
+      {loading ? (
+        <div className="h-screen flex items-center justify-center">
+          <RingLoader color="rgb(26, 115, 232)" size={200} />
         </div>
-      ))}
+      ) : (
+        issues.map((issue) => (
+          <div key={issue.id}>
+            <IssuePreview issue={issue} />
+          </div>
+        ))
+      )}
     </div>
   )
 }
