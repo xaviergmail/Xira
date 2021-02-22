@@ -14,6 +14,8 @@ import { createUser } from "../graphql/mutations"
 import { getUser } from "../graphql/queries"
 import NavBar from "./NavBar"
 
+import RingLoader from "react-spinners/RingLoader"
+
 Amplify.configure({
   ...config,
   // ssr: true,
@@ -25,9 +27,15 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   const [user, setUser] = useState<CognitoUser>()
+  console.log("user", typeof user)
+
+  const [loading, setLoading] = useState(true)
 
   async function getUserData() {
     const cognitoUser = await Auth.currentUserInfo()
+    if (loading) {
+      setLoading(false)
+    }
     if (user && user.username === cognitoUser.username) {
       return
     }
@@ -126,10 +134,17 @@ export default function Layout({ children }: Props) {
             ]}
           />
           <AmplifySignIn slot="sign-in" />
+
           <NavBar />
-          <div className="pt-16 bg-white w-full md:w-3/4 lg:w-3/5 mx-auto px-2">
-            {user ? children : <h1>Please sign in to continue</h1>}
-          </div>
+          {loading ? (
+            <div className="h-screen flex items-center justify-center">
+              <RingLoader color="rgb(26, 115, 232)" size={200} />
+            </div>
+          ) : (
+            <div className="pt-16 bg-white w-full md:w-3/4 lg:w-3/5 mx-auto px-2">
+              {user ? children : <h1>Please sign in to continue</h1>}
+            </div>
+          )}
         </AmplifyAuthenticator>
       </UserContext.Provider>
     </div>

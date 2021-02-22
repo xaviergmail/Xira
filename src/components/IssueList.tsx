@@ -10,23 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCommentAlt } from "@fortawesome/free-regular-svg-icons"
 import LinesEllipsis from "react-lines-ellipsis"
 import gql from "graphql-tag"
+import { lastUpdated } from "../util"
 
 export interface IAppProps {}
-
-function time(date?: string): number {
-  return Date.parse(date ?? "") ?? 0
-}
-
-function lastUpdated(issue: Issue) {
-  return Math.max(
-    ...[
-      issue.createdAt,
-      issue.updatedAt,
-      ...issue.comments?.items?.map((x) => x.createdAt),
-      ...issue.comments?.items?.map((x) => x.updatedAt),
-    ].map(time)
-  )
-}
 
 function IssuePreview({ issue, key }: { issue: Issue; key?: any }) {
   return (

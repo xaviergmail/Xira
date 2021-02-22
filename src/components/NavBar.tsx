@@ -23,13 +23,13 @@ export default function NavBar() {
   return (
     <header className="fixed left-0 right-0 top-0 bg-white border-b border-gray-200 shadow-sm">
       <nav className="container mx-auto flex items-center justify-between p-2">
-        <a className="" href="/">
+        <Link className="" to="/">
           <h1>XIRA</h1>
-        </a>
+        </Link>
         <div className="hidden md:block text-gray-300 mx-2">{"//"}</div>
-        <a className="hidden md:block" href="/">
+        <Link className="hidden md:block" to="/">
           <h1>Home</h1>
-        </a>
+        </Link>
         <Spacer />
         <p className="flex-grow">Hello, {user?.username}!</p>
         <Link

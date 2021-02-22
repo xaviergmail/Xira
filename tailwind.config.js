@@ -9,7 +9,9 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ["odd", "even", "active"],
+      backgroundColor: ["odd", "even", "active", "disabled"],
+      borderColor: ["disabled"],
+      cursor: ["disabled"],
     },
   },
   plugins: [],
