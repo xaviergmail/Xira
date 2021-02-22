@@ -1,14 +1,13 @@
-import React, { useContext } from "react"
+import React from "react"
 import IssueList from "../components/IssueList"
-import { UserContext } from "../store/user"
 
 export default function Home() {
-  const user = useContext(UserContext)
-
   return (
     <div className="container mx-auto p-2">
-      <main>
-        <h1>Welcome to Xira!</h1>
+      <main className="mt-4">
+        <h1 className="mb-8 text-center text-3xl font-medium">
+          What do you want to work on today?
+        </h1>
         <IssueList />
       </main>
     </div>

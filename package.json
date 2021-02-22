@@ -11,13 +11,21 @@
   "dependencies": {
     "@aws-amplify/ui-react": "^1.0.1",
     "@craco/craco": "^6.1.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@types/react-timeago": "^4.1.2",
     "aws-amplify": "^3.3.19",
     "formik": "^2.2.6",
     "graphql-tag": "^2.11.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-lines-ellipsis": "^0.14.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-timeago": "^5.2.0",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {

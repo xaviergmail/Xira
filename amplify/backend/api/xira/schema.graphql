@@ -87,5 +87,5 @@ type Issue
   text: String!
   comments: [Comment] @connection(keyName: "commentsByIssue", fields: ["id"])
   labels: [LabelIssues] @connection(keyName: "labelsByIssue", fields: ["id"])
-  status: String!
+  status: String
 }

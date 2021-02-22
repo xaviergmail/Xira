@@ -21,7 +21,7 @@ ReactDOM.render(
           <Route path="/issue/:issueID">
             <ViewIssuePage />
           </Route>
-          <Route path="/create-issue">
+          <Route path="/new-issue">
             <CreateIssuePage />
           </Route>
           <Route path="/">

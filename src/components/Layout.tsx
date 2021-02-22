@@ -98,36 +98,40 @@ export default function Layout({ children }: Props) {
   })
 
   return (
-    <UserContext.Provider value={user}>
-      <AmplifyAuthenticator>
-        <AmplifySignUp
-          slot="sign-up"
-          usernameAlias="username"
-          formFields={[
-            {
-              type: "username",
-              required: true,
-            },
-            {
-              type: "name",
-              placeholder: "Enter your first and last name",
-              label: "Name *",
-              required: true,
-            },
-            {
-              type: "email",
-              required: true,
-            },
-            {
-              type: "password",
-              required: true,
-            },
-          ]}
-        />
-        <AmplifySignIn slot="sign-in" />
-        <NavBar />
-        {user ? children : <h1>Loading user...</h1>}
-      </AmplifyAuthenticator>
-    </UserContext.Provider>
+    <div className="bg-gray-50">
+      <UserContext.Provider value={user}>
+        <AmplifyAuthenticator>
+          <AmplifySignUp
+            slot="sign-up"
+            usernameAlias="username"
+            formFields={[
+              {
+                type: "username",
+                required: true,
+              },
+              {
+                type: "name",
+                placeholder: "Enter your first and last name",
+                label: "Name *",
+                required: true,
+              },
+              {
+                type: "email",
+                required: true,
+              },
+              {
+                type: "password",
+                required: true,
+              },
+            ]}
+          />
+          <AmplifySignIn slot="sign-in" />
+          <NavBar />
+          <div className="pt-16 bg-white w-full md:w-3/4 lg:w-3/5 mx-auto px-2">
+            {user ? children : <h1>Please sign in to continue</h1>}
+          </div>
+        </AmplifyAuthenticator>
+      </UserContext.Provider>
+    </div>
   )
 }
