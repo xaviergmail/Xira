@@ -14,3 +14,23 @@ export function lastUpdated(issue: Issue) {
     ].map(time)
   )
 }
+
+interface HasCreatedAt {
+  createdAt?: string,
+}
+
+export function sortCreatedAtNewest(items: Array<HasCreatedAt>) {
+  return items.sort((a, b) => time(b.createdAt) - time(a.createdAt))
+}
+
+export function sortCreatedAtOldest(items: Array<HasCreatedAt>) {
+  return items.sort((a, b) => time(a.createdAt) - time(b.createdAt))
+}
+
+interface HasUpdatedAt {
+  createdAt?: string,
+}
+
+export function sortUpdatedAt(items: Array<HasUpdatedAt>) {
+  return items.sort((a, b) => time(a.createdAt) - time(b.createdAt))
+}

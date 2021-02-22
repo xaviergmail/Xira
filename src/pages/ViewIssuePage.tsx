@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify"
-import React, { HTMLAttributes, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { getIssue } from "../../src/graphql/queries"
 import Observable from "zen-observable-ts"
 import ReactTimeago from "react-timeago"
@@ -9,10 +9,11 @@ import CreateComment from "../components/CreateComment"
 import * as Model from "../../src/API"
 import { onCreateComment, onUpdateIssue } from "../../src/graphql/subscriptions"
 import { Link, useParams } from "react-router-dom"
-import { lastUpdated } from "../util"
+import { lastUpdated, sortCreatedAtOldest } from "../util"
 import ProfilePic from "../components/ProfilePic"
 
 import PacmanLoader from "react-spinners/PacmanLoader"
+import IssueStatus from "../components/IssueStatus"
 
 type RouteParams = { issueID: string }
 
@@ -52,6 +53,7 @@ export default function ViewIssue() {
       data: Model.GetIssueQuery
     }
 
+    sortCreatedAtOldest(issue?.comments?.items)
     setIssue(issue)
   }
 
@@ -69,13 +71,21 @@ export default function ViewIssue() {
         value: { data: { onCreateComment: Model.Comment } }
       }) => {
         if (comment.issueID === issueID) {
-          setIssue((issue) => ({
-            ...issue,
-            comments: {
-              ...issue.comments,
-              items: [...issue.comments.items, comment],
-            },
-          }))
+          setIssue((issue) => {
+            const newIssue = {
+              ...issue,
+              comments: {
+                ...issue.comments,
+                items: [
+                  ...issue.comments.items,
+                  comment,
+                ] as Array<Model.Comment>,
+              },
+            }
+            sortCreatedAtOldest(newIssue?.comments?.items)
+
+            return newIssue
+          })
         }
       }
     )
@@ -120,15 +130,7 @@ export default function ViewIssue() {
               <div className="flex flex-col md:flex-row items-start md:items-center">
                 <h1 className="text-2xl font-medium mr-4">{issue.title}</h1>
                 <div className="my-2">
-                  {issue.status !== "closed" ? (
-                    <span className="bg-green-500 p-1 text-white text-xs font-medium rounded">
-                      OPEN
-                    </span>
-                  ) : (
-                    <span className="bg-red-500 p-1 text-white text-xs font-medium rounded">
-                      CLOSED
-                    </span>
-                  )}
+                  <IssueStatus issue={issue} />
                 </div>
               </div>
               <h4 className="font-medium text-gray-400">

@@ -10,16 +10,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCommentAlt } from "@fortawesome/free-regular-svg-icons"
 import LinesEllipsis from "react-lines-ellipsis"
 import gql from "graphql-tag"
-import { lastUpdated } from "../util"
+import { lastUpdated, sortCreatedAtNewest } from "../util"
+import IssueStatus from "./IssueStatus"
 
 export interface IAppProps {}
 
-function IssuePreview({ issue, key }: { issue: Issue; key?: any }) {
+function IssuePreview({ issue }: { issue: Issue }) {
   return (
-    <Link to={"/issue/" + issue.id} key={key} className="p-2">
+    <Link to={"/issue/" + issue.id} className="p-2">
       <div className="flex flex-col mt-4">
         <div className="flex justify-between align-baseline">
-          <h1>{issue.title}</h1>
+          <div className="flex flex-col md:flex-row items-start md:items-center">
+            <h1 className="mr-4">{issue.title}</h1>
+            <IssueStatus issue={issue} />
+          </div>
           <div className="flex items-center text-gray-500">
             <span className="pr-4">
               {issue.comments.items.length ?? 0}{" "}
@@ -48,7 +52,7 @@ function IssuePreview({ issue, key }: { issue: Issue; key?: any }) {
 
 const listIssues = gql`
   query ListIssues {
-    listIssues(filter: { not: { status: { eq: "closed" } } }) {
+    listIssues {
       items {
         id
         owner
@@ -78,13 +82,16 @@ export default function IssueList() {
   }, [])
 
   async function getIssues() {
-    const {
+    let {
       data: {
         listIssues: { items: issues },
       },
     } = (await API.graphql(graphqlOperation(listIssues))) as {
       data: ListIssuesQuery
     }
+
+    sortCreatedAtNewest(issues)
+    console.log("issues", issues, "issues")
     updateIssues(issues)
   }
 
@@ -108,7 +115,9 @@ export default function IssueList() {
   return (
     <div className=" mx-auto flex flex-col divide-y divide-gray-200">
       {issues.map((issue) => (
-        <IssuePreview issue={issue} key={issue.id} />
+        <div key={issue.id}>
+          <IssuePreview issue={issue} />
+        </div>
       ))}
     </div>
   )
